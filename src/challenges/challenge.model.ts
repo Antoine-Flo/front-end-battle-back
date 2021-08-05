@@ -6,7 +6,7 @@ export const ChallengeSchema = new mongoose.Schema({
   imgUrl: { type: String, required: true },
 });
 
-export interface Challenge {
+export interface Challenge extends mongoose.Document {
   id: string;
   title: string;
   description: string;

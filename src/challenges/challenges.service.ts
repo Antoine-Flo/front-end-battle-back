@@ -5,36 +5,49 @@ import { Challenge } from './challenge.model';
 
 @Injectable()
 export class ChallengesService {
-  private challenges: Challenge[] = [];
 
   constructor(
     @InjectModel('Challenge') private readonly challengeModel: Model<Challenge>,
   ) {}
 
   async addChallenge(title: string, description: string, imgUrl: string) {
-    const newChallenge = new this.challengeModel({ title, description, imgUrl, });
-    const result = await newChallenge.save();    
+    const newChallenge = new this.challengeModel({
+      title,
+      description,
+      imgUrl,
+    });
+    const result = await newChallenge.save();
     return result.id as string;
   }
 
   async getChallenges() {
     const challenges = await this.challengeModel.find().exec();
-    return challenges as Challenge[];
+    return challenges.map((chal) => ({
+      id: chal.id,
+      title: chal.title,
+      description: chal.description,
+      imgUrl: chal.imgUrl,
+    }));
   }
 
-  getChallenge(challengeId: string) {
-    const challenge = this.findChallenge(challengeId)[0];
-    return { ...challenge };
+  async getChallenge(challengeId: string) {
+    const chal = await this.findChallenge(challengeId);
+    return {
+      id: chal.id,
+      title: chal.title,
+      description: chal.description,
+      imgUrl: chal.imgUrl,
+    };
   }
 
-  updateChallenge(
+  async updateChallenge(
     challengeId: string,
     title: string,
     description: string,
     imgUrl: string,
   ) {
-    const [challenge, index] = this.findChallenge(challengeId);
-    const updatedChallenge = { ...challenge };
+    const updatedChallenge = await this.findChallenge(challengeId);
+
     if (title) {
       updatedChallenge.title = title;
     }
@@ -44,22 +57,27 @@ export class ChallengesService {
     if (imgUrl) {
       updatedChallenge.imgUrl = imgUrl;
     }
-    this.challenges[index] = updatedChallenge;
+    updatedChallenge.save();
   }
 
-  deleteChallenge(challengeId: string) {
-    const [, index] = this.findChallenge(challengeId);
-    this.challenges.splice(index, 1);
+  async deleteChallenge(challengeId: string) {
+    const result = await this.challengeModel.deleteOne({_id: challengeId}).exec();
+    if(result.n === 0 ) {
+      throw new NotFoundException('Could not find product');
+    }
+    
   }
 
-  private findChallenge(challengeId: string): [Challenge, number] {
-    const challengeIndex = this.challenges.findIndex(
-      (chal) => chal.id === challengeId,
-    );
-    const challenge = this.challenges[challengeIndex];
+  private async findChallenge(challengeId: string): Promise<Challenge> {
+    let challenge;
+    try {
+      challenge = await this.challengeModel.findById(challengeId);
+    } catch (error) {
+      throw new NotFoundException('Could not find product');
+    }
     if (!challenge) {
       throw new NotFoundException('Could not find product');
     }
-    return [challenge, challengeIndex];
+    return challenge;
   }
 }

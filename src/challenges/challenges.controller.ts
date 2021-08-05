@@ -32,19 +32,19 @@ export class ChallengesController {
   }
 
   @Patch(':id')
-  patchChallenge(
+  async patchChallenge(
     @Param('id') chalId: string,
     @Body('title') chalTitle: string,
     @Body('description') chalDesc: string,
     @Body('imgUrl') chalImgUrl: string,
   ) {
-    this.challengesService.updateChallenge(chalId, chalTitle, chalDesc, chalImgUrl);
+    await this.challengesService.updateChallenge(chalId, chalTitle, chalDesc, chalImgUrl);
     return null;
   }
 
   @Delete(':id')
-  removeChallenge(@Param('id') chalId: string,) {
-    this.challengesService.deleteChallenge(chalId);
+  async removeChallenge(@Param('id') chalId: string,) {
+    await this.challengesService.deleteChallenge(chalId);
     return null;
   }
 }
