@@ -5,7 +5,7 @@ import { AppService } from './app.service';
 import { ChallengesModule } from './challenges/challenges.module';
 
 @Module({
-  imports: [ChallengesModule, MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@feb.gbbyi.mongodb.net/FEB?retryWrites=true&w=majority`)],
+  imports: [ChallengesModule, MongooseModule.forRoot(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@feb.gbbyi.mongodb.net/feb?retryWrites=true&w=majority`)],
   controllers: [AppController],
   providers: [AppService],
 })

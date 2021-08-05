@@ -6,12 +6,12 @@ export class ChallengesController {
   constructor(private readonly challengesService: ChallengesService) {}
 
   @Post()
-  addChallenge(
+  async addChallenge(
     @Body('title') chalTitle: string,
     @Body('description') chalDesc: string,
     @Body('imgUrl') chalImgUrl: string,
   ) {
-    const generatedId = this.challengesService.addChallenge(
+    const generatedId = await this.challengesService.addChallenge(
       chalTitle,
       chalDesc,
       chalImgUrl,
@@ -20,8 +20,9 @@ export class ChallengesController {
   }
 
   @Get()
-  getAllChallenges() {
-    return this.challengesService.getChallenges();
+  async getAllChallenges() {
+    const challenges = await this.challengesService.getChallenges();
+    return challenges;
   }
 
   // You can delete this comment
