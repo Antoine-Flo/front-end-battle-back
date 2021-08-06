@@ -8,11 +8,13 @@ export class ChallengesController {
   @Post()
   async addChallenge(
     @Body('title') chalTitle: string,
+    @Body('code') chalCode: string,
     @Body('description') chalDesc: string,
     @Body('imgUrl') chalImgUrl: string,
   ) {
     const generatedId = await this.challengesService.addChallenge(
       chalTitle,
+      chalCode,
       chalDesc,
       chalImgUrl,
     );
@@ -35,10 +37,11 @@ export class ChallengesController {
   async patchChallenge(
     @Param('id') chalId: string,
     @Body('title') chalTitle: string,
+    @Body('code') chalCode: string,
     @Body('description') chalDesc: string,
     @Body('imgUrl') chalImgUrl: string,
   ) {
-    await this.challengesService.updateChallenge(chalId, chalTitle, chalDesc, chalImgUrl);
+    await this.challengesService.updateChallenge(chalId, chalTitle, chalCode, chalDesc, chalImgUrl);
     return null;
   }
 

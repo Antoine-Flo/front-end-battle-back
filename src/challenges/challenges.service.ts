@@ -10,9 +10,10 @@ export class ChallengesService {
     @InjectModel('Challenge') private readonly challengeModel: Model<Challenge>,
   ) {}
 
-  async addChallenge(title: string, description: string, imgUrl: string) {
+  async addChallenge(title: string, code: string, description: string, imgUrl: string) {
     const newChallenge = new this.challengeModel({
       title,
+      code,
       description,
       imgUrl,
     });
@@ -25,6 +26,7 @@ export class ChallengesService {
     return challenges.map((chal) => ({
       id: chal.id,
       title: chal.title,
+      code: chal.code,
       description: chal.description,
       imgUrl: chal.imgUrl,
     }));
@@ -35,6 +37,7 @@ export class ChallengesService {
     return {
       id: chal.id,
       title: chal.title,
+      code: chal.code,
       description: chal.description,
       imgUrl: chal.imgUrl,
     };
@@ -43,6 +46,7 @@ export class ChallengesService {
   async updateChallenge(
     challengeId: string,
     title: string,
+    code: string,
     description: string,
     imgUrl: string,
   ) {
@@ -50,6 +54,9 @@ export class ChallengesService {
 
     if (title) {
       updatedChallenge.title = title;
+    }
+    if (code) {
+      updatedChallenge.code = code;
     }
     if (description) {
       updatedChallenge.description = description;
