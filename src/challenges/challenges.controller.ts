@@ -27,7 +27,6 @@ export class ChallengesController {
     return challenges;
   }
 
-  // You can delete this comment
   @Get(':id')
   getChallenge(@Param('id') chalId: string) {
     return this.challengesService.getChallenge(chalId);
