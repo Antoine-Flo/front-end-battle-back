@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+
 import { ChallengeSchema } from './challenge.model';
 import { ChallengesController } from './challenges.controller';
 import { ChallengesService } from './challenges.service';
