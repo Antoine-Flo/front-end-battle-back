@@ -11,9 +11,9 @@ jobs:
     environment: dev
     runs-on: self-hosted
     env:
-          DB_USER: {{ dev.DB_USER }}
-          DB_PASSWORD: {{ dev.DB_PASSWORD }}
-          PORT: {{ dev.PORT }}
+          DB_USER: '${{ dev.DB_USER }}'
+          DB_PASSWORD: '${{ dev.DB_PASSWORD }}'
+          PORT: '${{ dev.PORT }}'
 
     steps:
       - name: Checkout main branch
