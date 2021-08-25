@@ -16,22 +16,22 @@ export class ChallengesController {
   constructor(private readonly challengesService: ChallengesService) {}
 
   @Post()
-  create(@Body() challenge: CreateChallengeDto) {
+  async create(@Body() challenge: CreateChallengeDto) {
     return this.challengesService.create(challenge);
   }
 
   @Get()
-  findAll() {
+  async findAll() {
     return this.challengesService.findAll();
   }
 
   @Get(':id')
-  findOne(@Param('id') chalId: string) {
+  async findOne(@Param('id') chalId: string) {
     return this.challengesService.findOne(chalId);
   }
 
   @Patch(':id')
-  patchChallenge(
+  async patchChallenge(
     @Param('id') id: string,
     @Body() updateChallengeDto: UpdateChallengeDto,
   ) {
@@ -39,7 +39,7 @@ export class ChallengesController {
   }
 
   @Delete(':id')
-  removeChallenge(@Param('id') id: string) {
+  async removeChallenge(@Param('id') id: string) {
     return this.challengesService.deleteChallenge(id);
   }
 }

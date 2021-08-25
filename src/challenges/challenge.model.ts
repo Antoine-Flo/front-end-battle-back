@@ -1,19 +1,27 @@
-import * as mongoose from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
-export const ChallengeSchema = new mongoose.Schema({
-  id: { type: String, required: true },
-  title: { type: String, required: true },
-  code: { type: String, required: true },
-  description: { type: String, required: true },
-  imgId: { type: String, required: true },
-  creatorId: { type: String, required: true },
-});
+export type ChallengeDocument = Challenge & Document;
 
-export interface Challenge extends mongoose.Document {
+@Schema()
+export class Challenge {
+  @Prop({ required: true })
   id: string;
+  
+  @Prop()
   title: string;
+
+  @Prop({ required: true })
   code: string;
+
+  @Prop()
   description: string;
+
+  @Prop()
   imgId: string;
+
+  @Prop({ required: true })
   creatorId: string;
 }
+
+export const ChallengeSchema = SchemaFactory.createForClass(Challenge);
