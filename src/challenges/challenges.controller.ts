@@ -7,10 +7,18 @@ import {
   Patch,
   Delete,
 } from '@nestjs/common';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { ChallengesService } from './challenges.service';
 import { CreateChallengeDto } from './dto/create-challenge.dto';
 import { UpdateChallengeDto } from './dto/update-challenge.dto';
 
+@ApiBearerAuth()
+@ApiTags('challenges')
 @Controller('challenges')
 export class ChallengesController {
   constructor(private readonly challengesService: ChallengesService) {}
