@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Stop PM2
-        uses: pm2 stop main
+        run: pm2 stop main
 
       - name: Install dependencies
         run: npm ci
