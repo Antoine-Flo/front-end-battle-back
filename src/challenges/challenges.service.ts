@@ -21,7 +21,10 @@ export class ChallengesService {
   }
 
   async findOne(id: string) {
-    return this.findChallenge(id);
+    return this.findChallenge(id).then((challenge) => {
+      if (!challenge) throw new NotFoundException();
+      if (challenge) return challenge;
+    });
   }
 
   async updateChallenge(id: string, updateChallengeDto: UpdateChallengeDto) {
