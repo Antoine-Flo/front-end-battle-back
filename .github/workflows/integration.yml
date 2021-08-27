@@ -19,8 +19,14 @@ jobs:
       - name: Checkout main branch
         uses: actions/checkout@v2
 
+      - name: Stop PM2
+        uses: PM2 stop main
+
       - name: Install dependencies
         run: npm ci
 
       - name: Build application
         run: npm run build
+
+      - name: Start PM2
+        uses: pm2 start /root/actions-runner/_work/front-end-battle-back/front-end-battle-back/dist/main.js
