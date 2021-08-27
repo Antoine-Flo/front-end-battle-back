@@ -52,13 +52,15 @@ export class UsersController {
     return this.usersService.update(id, updateUserDto);
   }
 
+  @Patch(':userEmail/challenge')
+  deleteChallenge(@Param('userEmail') userEmail: string, @Body() challenge: {id: string, }) {
+    return this.usersService.deleteChallenge(userEmail, challenge)
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
   }
 
-  @Delete(':userEmail/challenge')
-  deleteChallenge(@Param('userEmail') userEmail: string, @Body() challenge: {id: string, }) {
-    return this.usersService.deleteChallenge(userEmail, challenge)
-  }
+
 }
