@@ -10,7 +10,7 @@ export class UsersService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
   ) {}
-  // You cann delete that
+
   create(createUserDto: CreateUserDto) {
     const newUser = new this.userModel(createUserDto);
     return newUser

@@ -37,6 +37,7 @@ export class UsersController {
   }
 
   @Get()
+  @ApiOperation({ summary: "Find all the users." })
   findAll() {
     return this.usersService.findAll();
   }
