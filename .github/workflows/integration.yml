@@ -29,4 +29,4 @@ jobs:
         run: npm run build
 
       - name: Start PM2
-        uses: pm2 start /root/actions-runner/_work/front-end-battle-back/front-end-battle-back/dist/main.js
+        run: pm2 start /root/actions-runner/_work/front-end-battle-back/front-end-battle-back/dist/main.js
