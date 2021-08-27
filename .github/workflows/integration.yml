@@ -23,6 +23,10 @@ jobs:
         run: npm ci
 
       - name: Build application
-      - run: npm run build
-      - run: pm2 stop main
-      - run: pm2 start main
+        run: npm run build
+
+      - name: stop PM2
+        run: pm2 stop  main
+
+      - name: stop PM2
+        run: pm2 start  main
