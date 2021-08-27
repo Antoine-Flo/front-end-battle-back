@@ -12,6 +12,11 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
+  @Post(':id/challenge')
+  addChallenge(@Param('id') userId: string, @Body() challengeId: string) {
+    return this.usersService.addChallenge(userId, challengeId)
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();

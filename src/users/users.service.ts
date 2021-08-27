@@ -10,7 +10,7 @@ export class UsersService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<User>,
   ) {}
-  
+  // You cann delete that
   create(createUserDto: CreateUserDto) {
     const newUser = new this.userModel(createUserDto);
     return newUser
@@ -19,6 +19,10 @@ export class UsersService {
         return 'Nouveau utilisateur créé';
       })
       .catch((err) => console.log(err));
+  }
+
+  addChallenge(userId: string, challengeId: string) {
+    return this.userModel.updateOne({id: userId}, { $push: { challenges:  challengeId } })
   }
 
   findAll() {
