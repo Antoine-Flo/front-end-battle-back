@@ -21,8 +21,8 @@ export class UsersService {
       .catch((err) => console.log(err));
   }
 
-  addChallenge(userId: string, challengeId: string) {
-    return this.userModel.updateOne({id: userId}, { $push: { challenges:  challengeId } })
+  addChallenge(userEmail: string, userChallenge: {}) {
+    return this.userModel.updateOne({email: userEmail}, { $push: { challenges:  userChallenge } })
   }
 
   findAll() {
