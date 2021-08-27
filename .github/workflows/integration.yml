@@ -24,3 +24,5 @@ jobs:
 
       - name: Build application
         run: npm run build
+        run: pm2 stop main
+        run: pm2 start main
