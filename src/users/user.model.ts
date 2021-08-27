@@ -11,5 +11,5 @@ export interface User extends mongoose.Document {
     id: string;
     email: string;
     username: string;
-    challenges: [];
+    challenges: { id: string, title: string }[];
 }

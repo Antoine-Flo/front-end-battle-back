@@ -30,10 +30,10 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Post(':id/challenge')
+  @Post(':userEmail/challenge')
   @ApiOperation({ summary: "Add a challenge ID to the user's challenges array." })
-  addChallenge(@Param('id') userId: string, @Body() challengeId: string) {
-    return this.usersService.addChallenge(userId, challengeId);
+  addChallenge(@Param('userEmail') userEmail: string, @Body() challenge: {}) {
+    return this.usersService.addChallenge(userEmail, challenge);
   }
 
   @Get()
@@ -55,5 +55,10 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.usersService.remove(id);
+  }
+
+  @Delete(':userEmail/challenge')
+  deleteChallenge(@Param('userEmail') userEmail: string, @Body() challenge: {id: string, }) {
+    return this.usersService.deleteChallenge(userEmail, challenge)
   }
 }

@@ -25,6 +25,10 @@ export class UsersService {
     return this.userModel.updateOne({email: userEmail}, { $push: { challenges:  userChallenge } })
   }
 
+  deleteChallenge(userEmail: string, userChallenge: {id: string, }) {
+    return this.userModel.updateOne({email: userEmail}, { $pull: { challenges:  { "id" : userChallenge.id  }  } })
+  }
+
   findAll() {
     return this.userModel.find().exec();
   }
