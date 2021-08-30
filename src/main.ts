@@ -25,9 +25,9 @@ async function bootstrap() {
   app.enableCors();
   app.useGlobalFilters(new ValidationErrorFilter());
 
-  admin.initializeApp({
-    credential: admin.credential.cert(adminConfig),
-  });
+  // admin.initializeApp({
+  //   credential: admin.credential.cert(adminConfig),
+  // });
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
