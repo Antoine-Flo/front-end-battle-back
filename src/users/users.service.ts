@@ -25,7 +25,6 @@ export class UsersService {
   }
 
   findUserID(email: string) {
-     
     return this.userModel.findOne({ email }, { id: 1 }).then((id) => {
       if (!id) throw new NotFoundException();
       if (id) return id;
