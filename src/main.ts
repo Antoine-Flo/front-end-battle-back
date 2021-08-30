@@ -20,14 +20,14 @@ const config = new DocumentBuilder()
   .build();
 
 async function bootstrap() {
+
+  admin.initializeApp({
+    credential: admin.credential.cert(adminConfig),
+  });
+
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
-  app.enableCors();
   app.useGlobalFilters(new ValidationErrorFilter());
-
-  // admin.initializeApp({
-  //   credential: admin.credential.cert(adminConfig),
-  // });
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
