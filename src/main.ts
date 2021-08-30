@@ -21,9 +21,9 @@ const config = new DocumentBuilder()
 
 async function bootstrap() {
 
-  admin.initializeApp({
-    credential: admin.credential.cert(adminConfig),
-  });
+  // admin.initializeApp({
+  //   credential: admin.credential.cert(adminConfig),
+  // });
 
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
