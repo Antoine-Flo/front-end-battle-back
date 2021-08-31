@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt'
 
 import { AppService } from './app.service';
 import { ChallengesModule } from './challenges/challenges.module';
@@ -10,6 +11,7 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Module({
   imports: [
+    JwtModule.register({ secret: 'hard!to-guess_secret' }),
     ConfigModule.forRoot(),
     ChallengesModule,
     UsersModule,
