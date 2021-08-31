@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
-import { ValidationErrorFilter } from './validation-error.filter';
+import { ValidationErrorFilter } from './filters/validation-error.filter';
 import * as admin from 'firebase-admin';
 import * as helmet from 'helmet';
 
