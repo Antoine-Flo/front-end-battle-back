@@ -42,7 +42,8 @@ export class UsersController {
   
   @Get(':email/id')
   findUserId(@Param('email') email: string) {
-    return this.usersService.findUserID(atob(email));
+
+    return this.usersService.findUserID(email);
   }
   
   ////////////////////
