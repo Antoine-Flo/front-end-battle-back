@@ -8,10 +8,12 @@ import { ChallengesModule } from './challenges/challenges.module';
 import { UsersModule } from './users/users.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
-    JwtModule.register({ secret: 'hard!to-guess_secret' }),
+    JwtModule.register({ secret: process.env.IS_PUBLIC_KEY }),
+    HttpModule,
     ConfigModule.forRoot(),
     ChallengesModule,
     UsersModule,
