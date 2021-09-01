@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ValidationErrorFilter } from './filters/validation-error.filter';
-import * as admin from 'firebase-admin';
 import * as helmet from 'helmet';
 
 import { ServiceAccount } from 'firebase-admin';
@@ -21,13 +20,9 @@ const config = new DocumentBuilder()
 
 async function bootstrap() {
 
-  // admin.initializeApp({
-  //   credential: admin.credential.cert(adminConfig),
-  // });
-
   const app = await NestFactory.create(AppModule);
   app.use(helmet());
-  app.enableCors();
+  // app.enableCors();
   app.useGlobalFilters(new ValidationErrorFilter());
 
   const document = SwaggerModule.createDocument(app, config);
